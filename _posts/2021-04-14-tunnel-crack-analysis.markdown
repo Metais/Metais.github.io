@@ -143,8 +143,8 @@ By running this script 3 times, once for every original data directory, we obtai
 ### Deep Learning With PyTorch and the 'autoEncoder.py' Script
 The autoEncoder script contains all the necessary functions and classes to load the 6 data directories, initialize the appropriate PyTorch dataloaders, extract the neural architectures from Torch hub, train, and validate the network. This code is our main contribution to the reproducibility effort. It is based on the PyTorch [example](https://github.com/qubvel/segmentation_models.pytorch/blob/master/examples/cars%20segmentation%20(camvid).ipynb) as discussed before. For the reader's convenience, this script is split up in several code blocks to discuss the block's functions accordingly.
 
-autoEncoder.py 			 	|
-:-------------------------:	|
+###### autoEncoder.py
+
 Importing the necessary modules in the python script, their description was given before in the Dependencies section. We are pointing to the `./data` directory in our current working directory to load in the data. This directory should contain the 6 CRACK500 data directories. Separate variables are specified for each directory such that these can be called by their respective dataloaders.
 
 ```
@@ -191,8 +191,7 @@ dataset image and ground truth  	|
 :-------------------------:			|
 ![outputDataset](/assets/img/outputDataset.png)	|
 
-autoEncoder.py - continued	|
-:-------------------------:	|
+###### autoEncoder.py - continued
 
 ```
 # helper class for data extraction, transformation and preprocessing
@@ -278,8 +277,8 @@ augmented dataset image and ground truth  	|
 :-------------------------:					|
 ![outputDataset_aug](/assets/img/outputDataset_aug1.png)|
 
-autoEncoder.py - continued	|
-:-------------------------:	|
+###### autoEncoder.py - continued
+
 ```
 import albumentations as albu
 
@@ -498,8 +497,8 @@ prediction of test dataset - epoch 31 (image, ground truth, prediction)  	|
 ![outAutoRun3_4.png](/assets/img/outAutoEncRun3_4.png)						|
 ![outAutoRun3_5.png](/assets/img/outAutoEncRun3_5.png)						|
 
-autoEncoder.py - continued 	|
-:-------------------------:	|
+###### autoEncoder.py - continued
+
 ```
 # test best saved model
 # load best saved checkpoint
