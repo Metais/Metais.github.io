@@ -110,8 +110,8 @@ truths (with a .png suffix). We iterated over this data and put them in their
 own respective directories (e.g. 'train' and 'trainannot') to obtain 6 data 
 directories as to make the data more conform with the data structure from the [segmentation-models-pytorch](https://github.com/qubvel/segmentation_models.pytorch) example ([CamVid](https://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/)).
 
-movingData.py 				|
-:-------------------------:	|
+###### movingData.py
+
 ```						
 # import necessary modules
 import argparse
