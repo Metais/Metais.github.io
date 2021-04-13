@@ -6,7 +6,7 @@ categories: DeepLearning
 ---
 ## Applying high-speed image recognition for practical use-cases
 
-#####_By Michiel Firlefyn (M.V.M.Firlefyn@student.tudelft.nl; 4558774) and Matthijs van Wijngaarden (M.C.Vanwijngaarden@student.tudelft.nl; 4271785)_
+##### _By Michiel Firlefyn (M.V.M.Firlefyn@student.tudelft.nl; 4558774) and Matthijs van Wijngaarden (M.C.Vanwijngaarden@student.tudelft.nl; 4271785)_
 
 The emergence of deep learning in real-world applications outside academia continues to grow. It's not a surprise, as it has been shown that these artificial intelligence methods can increase the efficiency, speed or accuracy of a system. The application of the technology in numerous fields is an indicator that AI is starting to mature despite continuous developments. Because of this, it is important to take a step back and take a look at projects described by researchers. Neural networks, and more specifically, the conclusions or results produced by the technology is notorious for its inexplainability, or 'black-box' behavior. The question whether conclusions are reproducable is vital, especially with applications relating to health or human safety. Problems arisen by malfunctioning systems or unethical decision-making are hot-topics in the field of AI. The ability to reproduce a system therefore does not only further cement the trust of it functioning as described in the paper, but also gives an insight into its mechanisms. 
 
@@ -26,7 +26,7 @@ Due to the detail of this requiring a fast-paced environment, the implementation
 
 The segmentation process contains training process and inference process    |
 :-------------------------:			|
-![Figure5](Figure5.png) |
+![Figure5](/assets/img/Figure5.png) |
 
 In the figure above, the researchers divided their system up in two parts: training and inference. A important distinction, for example, is their choice of encoders during each phase: ResNet18 was chosen for training, and a combination of MobileNet-v1 [2] and CrossNet was used during inference. The decoder they used was ASPP [3] in both cases. MobileNet-v1 is a lightweight model that outperforms  many networks with a lot of computations, hence its use in the inference phase.
 
@@ -34,7 +34,7 @@ The researchers had access to a database of photos of cracks in tunnels, which w
 
 The original image (left) and the image with crack, structural seam, water stain and scratch annotations (right) |
 :-------------------------:			|
-![Figure7](Figure7.png) |
+![Figure7](/assets/img/Figure7.png) |
 
 Unfortunately, a kind email towards the researchers that requested access to their image database, including its annotations, was left unanswered. This lead us to our first hurdle: being unable to reproduce the researcher's results due to needing to use a profoundly different dataset. On top of this, the source code of the paper was not made public, meaning the implementation of their convolutional network had to be done based off of their description of which type of encoder/decoder they used. Hyperparameters such as layer depth were available, but others like the learning rate not. This left us at a task that made it substantially harder to successfully reproduce their results. Or, at least, the results produced based off of un-augmented datasets.
 
@@ -42,13 +42,13 @@ Unfortunately, a kind email towards the researchers that requested access to the
 ### Reproducible results
 Results of the original experiments in normal and augmented datasets |
 :-------------------------:			|
-![Table1](Table1.png)   |
+![Table1](/assets/img/Table1.png)   |
 
 The table shows the different results the authors obtained. Subsequent tables and figures were produced from the augmented set. This left us at the task of attempting to reproduce the first row, and to see how far we would get with the figures.
 
 The final segmentation results |
 :-------------------------:			|
-![Figure11](Figure11.png)   |
+![Figure11](/assets/img/Figure11.png)   |
 
 The first column in the image shows the original photo, the second column the annotations done by hand, while the third is the predicted image. The rest of this blog will describe our attempts at reproducing this table and right-most column in the figure.
 
@@ -99,7 +99,7 @@ An example image of the CRACK500 data set and its ground truth:
 
 CRACK500 image             |  CRACK500 ground truth
 :-------------------------:|:-------------------------:
-![CRACK500_example](CRACK500_example.jpg)  |  ![CRACK500_gt](CRACK500_gt.png)
+![CRACK500_example](/assets/img/CRACK500_example.jpg)  |  ![CRACK500_gt](/assets/img/CRACK500_gt.png)
 
 A problem faced when running a toy example of the neural network was that a part of the validation set broke our code. It turned out that the network's input image pixel dimension needed to be a multiple of two to the power of the network's depth, i.e. 32. All images were sized 640x360, while 17 images at the end of the validation dataset were sized 648x484. Cropping these images to 640x360 while maintaining the crack ground truth fixed this problem.
 
@@ -189,7 +189,7 @@ Finally, a sample is visualized of a `Dataset` object without augmentation or pr
 
 dataset image and ground truth  	|           
 :-------------------------:			|
-![outputDataset](outputDataset.png)	|
+![outputDataset](/assets/img/outputDataset.png)	|
 
 autoEncoder.py - continued	|
 :-------------------------:	|
@@ -276,7 +276,7 @@ Three augmented samples from the augmented_dataset are visualized in the code, o
 
 augmented dataset image and ground truth  	|           
 :-------------------------:					|
-![outputDataset_aug](outputDataset_aug1.png)|
+![outputDataset_aug](/assets/img/outputDataset_aug1.png)|
 
 autoEncoder.py - continued	|
 :-------------------------:	|
@@ -472,31 +472,31 @@ The autoencoder's prediction at training epoch 1:
 
 prediction of test dataset - epoch 1 (image, ground truth, prediction)  	|           
 :-------------------------:										|
-![outAutoEnc1](outAutoEnc1.png)							|
-![outAutoEnc2](outAutoEnc2.png)							|
-![outAutoEnc3](outAutoEnc3.png)							|
-![outAutoEnc4](outAutoEnc4.png)							|
-![outAutoEnc5](outAutoEnc5.png)							|
+![outAutoEnc1](/assets/img/outAutoEnc1.png)							|
+![outAutoEnc2](/assets/img/outAutoEnc2.png)							|
+![outAutoEnc3](/assets/img/outAutoEnc3.png)							|
+![outAutoEnc4](/assets/img/outAutoEnc4.png)							|
+![outAutoEnc5](/assets/img/outAutoEnc5.png)							|
 
 The autoencoder's prediction at training epoch 28:
 
 prediction of test dataset - epoch 28 (image, ground truth, prediction)  	|           
 :-------------------------:										|
-![outAutoRun2_1.png](outAutoEncRun2_1.png)						|
-![outAutoRun2_2.png](outAutoEncRun2_2.png)						|
-![outAutoRun2_3.png](outAutoEncRun2_3.png)						|
-![outAutoRun2_4.png](outAutoEncRun2_4.png)						|
-![outAutoRun2_5.png](outAutoEncRun2_5.png)						|
+![outAutoRun2_1.png](/assets/img/outAutoEncRun2_1.png)						|
+![outAutoRun2_2.png](/assets/img/outAutoEncRun2_2.png)						|
+![outAutoRun2_3.png](/assets/img/outAutoEncRun2_3.png)						|
+![outAutoRun2_4.png](/assets/img/outAutoEncRun2_4.png)						|
+![outAutoRun2_5.png](/assets/img/outAutoEncRun2_5.png)						|
 
 The autoencoder's final prediction:
 
 prediction of test dataset - epoch 31 (image, ground truth, prediction)  	|           
 :-------------------------:										|
-![outAutoRun3_1.png](outAutoEncRun3_1.png)						|
-![outAutoRun3_2.png](outAutoEncRun3_2.png)						|
-![outAutoRun3_3.png](outAutoEncRun3_3.png)						|
-![outAutoRun3_4.png](outAutoEncRun3_4.png)						|
-![outAutoRun3_5.png](outAutoEncRun3_5.png)						|
+![outAutoRun3_1.png](/assets/img/outAutoEncRun3_1.png)						|
+![outAutoRun3_2.png](/assets/img/outAutoEncRun3_2.png)						|
+![outAutoRun3_3.png](/assets/img/outAutoEncRun3_3.png)						|
+![outAutoRun3_4.png](/assets/img/outAutoEncRun3_4.png)						|
+![outAutoRun3_5.png](/assets/img/outAutoEncRun3_5.png)						|
 
 autoEncoder.py - continued 	|
 :-------------------------:	|
@@ -770,13 +770,13 @@ We ran the trainer for a total of 40 epochs. On the 31st epoch, the validation s
 
 prediction of test dataset - epoch 31 (image, ground truth, prediction)  	|           
 :-------------------------:										|
-![outAutoRun3_1.png](outAutoEncRun3_1.png)						|
+![outAutoRun3_1.png](/assets/img/outAutoEncRun3_1.png)						|
 
 From first sight it might be apparant that the results we obtained did not live up to the original paper's goals. Before we make any conclusions, let's take a look at some metrics that help us evaluate our segmentation model better, that were outputted after every epoch: dice-loss and IoU scores.
 
 Dice loss for the validation set at each epoch | IoU score for the validation set at each epoch          
 :-------------------------:|:-------------------------:
-![dice_loss.png](dice_loss.png) | ![iou_score.png](iou_score.png) 
+![dice_loss.png](/assets/img/dice_loss.png) | ![iou_score.png](/assets/img/iou_score.png) 
 
 The graph plotting the dice loss at each epoch shows a general downtrend behavior, while the IoU score does the opposite. 
 
@@ -784,7 +784,7 @@ Is this good? Let's take a step back and ask ourselves what these metrics for ev
 
 Dice coefficient explained. | IoU score explained.
 :-------------------------:|:-------------------------:
-![dice_explained.png](dice_explained.png) | ![iou_explained.png](iou_explained.png)
+![dice_explained.png](/assets/img/dice_explained.png) | ![iou_explained.png](/assets/img/iou_explained.png)
 
 Unlike the naive method of pixel accuracy (PA), which represents the ratio of correctly classified pixels, the IoU, also known as the Jaccard index, takes the overlap between the prediction and the ground truth into account. More specifically, it is the overlap divided by its union. 
 
