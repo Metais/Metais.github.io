@@ -799,12 +799,12 @@ Another reason for our predictor's inconsistency was our lack of readily availab
 
 Each point we discussed that might have contributed to a lesser performance of our predictor are points that could be overridden, given we had better data available, better computing power, or more insight in the original paper's code. With these limitations overcome, we believe that we could have achieved the original performance of the unannotated data set.
 
-####References
+#### References
 - [1] Song, Q., Wu, Y., Xin, X., Yang, L., Yang, M., Chen, H., Liu, C., Hu, M., Chai, X., Li, J. (2019). Real-Time Tunnel Crack Analysis System via Deep Learning. IEEE Access, 7, 64186–64197. https://doi.org/10.1109/access.2019.2916330
 - [2] A. G. Howard et al., "MobileNets: Efficient convolutional neural networks for mobile vision applications", Proc. CVPR, 2017. https://arxiv.org/abs/1704.04861
 - [3] L.-C. Chen, G. Papandreou, F. Schroff and H. Adam, Rethinking atrous convolution for semantic image segmentation, 2017, https://arxiv.org/abs/1706.05587.
 
-####Overview of general tasks:
+#### Overview of general tasks
 Michiel Firlefyn:
 - Cloned and implemented the predictor
 - Tweaked code to make it work on input data
