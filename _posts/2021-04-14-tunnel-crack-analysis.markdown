@@ -4,10 +4,9 @@ title:  "Tunnel Crack Analysis: A Deep Learning System"
 date:   2021-04-14 01:04:00 +0200
 categories: DeepLearning
 ---
-# Tunnel Crack Analysis: A Deep Learning System
 ## Applying high-speed image recognition for practical use-cases
 
-######_By Michiel Firlefyn (M.V.M.Firlefyn@student.tudelft.nl; 4558774) and Matthijs van Wijngaarden (M.C.Vanwijngaarden@student.tudelft.nl; 4271785)_
+#####_By Michiel Firlefyn (M.V.M.Firlefyn@student.tudelft.nl; 4558774) and Matthijs van Wijngaarden (M.C.Vanwijngaarden@student.tudelft.nl; 4271785)_
 
 The emergence of deep learning in real-world applications outside academia continues to grow. It's not a surprise, as it has been shown that these artificial intelligence methods can increase the efficiency, speed or accuracy of a system. The application of the technology in numerous fields is an indicator that AI is starting to mature despite continuous developments. Because of this, it is important to take a step back and take a look at projects described by researchers. Neural networks, and more specifically, the conclusions or results produced by the technology is notorious for its inexplainability, or 'black-box' behavior. The question whether conclusions are reproducable is vital, especially with applications relating to health or human safety. Problems arisen by malfunctioning systems or unethical decision-making are hot-topics in the field of AI. The ability to reproduce a system therefore does not only further cement the trust of it functioning as described in the paper, but also gives an insight into its mechanisms. 
 
@@ -19,7 +18,7 @@ In this blog we attempt to reproduce a deep learning system presented by a group
 
 The overview of the system framework containing the image acquisition system, the vehicle-control system and the crack identification and management system  	|           
 :-------------------------:			|
-![Figure1](Figure1.png)             |
+![Figure1](/assets/img/Figure1.png)             |
 
 Before we dive deeper into the deep learning mechanisms, it might help to look at the problem statement. Identifying cracks in tunnels is something currently done by humans with the naked eye. Logically, this is a slow and costly process. The authors describe in their paper how these current methods to identify cracks in tunnels are inefficient, slow and manpower-heavy. The goal of their research is to develop a system that can rapidly take high-quality photos as it drives through a tunnel and use artificial intelligence to segmentate and identify cracks in the walls.
 
