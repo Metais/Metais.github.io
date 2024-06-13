@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAST Framework for Assessment of Drugs</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="/Icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Assessment Tool</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Icon.png">
 </head>
 <body>
-  <div class="container">
-    <h1>Questionnaire</h1>
-    <form id="questionnaire">
-      <div class="question">
-        <label for="name">What is your name?</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="question">
-        <label for="age">How old are you?</label>
-        <input type="number" id="age" name="age" required>
-      </div>
-      <div class="question">
-        <label for="color">What is your favorite color?</label>
-        <input type="text" id="color" name="color" required>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-    <div id="summary" class="hidden">
-      <h2>Summary</h2>
-      <p id="summaryText"></p>
-    </div>
-  </div>
-  <script src="script.js"></script>
+    <header>
+        <h1>Welcome to the Drug Assessment Tool</h1>
+    </header>
+    <main>
+        <form id="selectionForm">
+            <label for="drug">Select Drug:</label>
+            <select id="drug" name="drug" required></select>
+
+            <label for="ageGroup">Select Age Group:</label>
+            <select id="ageGroup" name="ageGroup" required>
+                <option value="child">Child</option>
+                <option value="adult">Adult</option>
+                <option value="senior">Senior</option>
+            </select>
+
+            <label for="indication">Select Indication:</label>
+            <select id="indication" name="indication" required></select>
+
+            <button type="submit">Start Assessment</button>
+        </form>
+    </main>
+    <script src="scripts/scripts.js"></script>
 </body>
 </html>
