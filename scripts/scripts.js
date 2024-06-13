@@ -5,47 +5,50 @@ document.addEventListener("DOMContentLoaded", function() {
       "Ibuprofen": ["Inflammation", "Pain", "Fever"]
   };
 
-  const drugSelect = document.getElementById('drug');
-  const indicationSelect = document.getElementById('indication');
+  if (window.location.pathname.endsWith('assessment.html') == false && window.location.pathname.endsWith('summary.html') == false) {
 
-  // Function to populate drug options
-  function populateDrugOptions() {
-      for (const drug in drugs) {
-          const option = document.createElement('option');
-          option.value = drug;
-          option.textContent = drug;
-          drugSelect.appendChild(option);
-      }
+    const drugSelect = document.getElementById('drug');
+    const indicationSelect = document.getElementById('indication');
+
+    // Function to populate drug options
+    function populateDrugOptions() {
+        for (const drug in drugs) {
+            const option = document.createElement('option');
+            option.value = drug;
+            option.textContent = drug;
+            drugSelect.appendChild(option);
+        }
+    }
+
+    // Initial population of drug options
+    populateDrugOptions();
+
+    // Update indications based on selected drug
+    drugSelect.addEventListener('change', function() {
+        indicationSelect.innerHTML = '';
+        const selectedDrug = drugSelect.value;
+        if (selectedDrug) {
+            drugs[selectedDrug].forEach(indication => {
+                const option = document.createElement('option');
+                option.value = indication;
+                option.textContent = indication;
+                indicationSelect.appendChild(option);
+            });
+        }
+    });
+
+    // Handle form submission
+    document.getElementById('selectionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const drug = drugSelect.value;
+        const ageGroup = document.getElementById('ageGroup').value;
+        const indication = indicationSelect.value;
+        sessionStorage.setItem('drug', drug);
+        sessionStorage.setItem('ageGroup', ageGroup);
+        sessionStorage.setItem('indication', indication);
+        window.location.href = 'assessment.html';
+    });
   }
-
-  // Initial population of drug options
-  populateDrugOptions();
-
-  // Update indications based on selected drug
-  drugSelect.addEventListener('change', function() {
-      indicationSelect.innerHTML = '';
-      const selectedDrug = drugSelect.value;
-      if (selectedDrug) {
-          drugs[selectedDrug].forEach(indication => {
-              const option = document.createElement('option');
-              option.value = indication;
-              option.textContent = indication;
-              indicationSelect.appendChild(option);
-          });
-      }
-  });
-
-  // Handle form submission
-  document.getElementById('selectionForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const drug = drugSelect.value;
-      const ageGroup = document.getElementById('ageGroup').value;
-      const indication = indicationSelect.value;
-      sessionStorage.setItem('drug', drug);
-      sessionStorage.setItem('ageGroup', ageGroup);
-      sessionStorage.setItem('indication', indication);
-      window.location.href = 'assessment.html';
-  });
 
   // Populate assessment form
   if (window.location.pathname.endsWith('assessment.html')) {
