@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to populate drug options
   function populateDrugOptions() {
-    for (const drug in drugs) {
-        const option = document.createElement('option');
-        option.value = drug;
-        option.textContent = drug;
-        drugSelect.appendChild(option);
-    }
+      for (const drug in drugs) {
+          const option = document.createElement('option');
+          option.value = drug;
+          option.textContent = drug;
+          drugSelect.appendChild(option);
+      }
   }
 
   // Initial population of drug options
