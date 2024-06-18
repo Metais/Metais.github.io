@@ -1,0 +1,86 @@
+{
+    "Assessment available data": {
+        "question": "Assessment available data",
+        "children": {
+            "What is known from original studies in children about efficacy of the intended use?": {
+                "question": "What is known from original studies in children about efficacy of the intended use?",
+                "children": {
+                    "What clinical parameters and cut-offs are used to define sufficient efficacy?": { "question": "What clinical parameters and cut-offs are used to define sufficient efficacy?" },
+                    "What study method has been used?": { "question": "What study method has been used?" },
+                    "The number of study participants in each study?": { "question": "The number of study participants in each study?" },
+                    "What kind of formulation has been studied?": { "question": "What kind of formulation has been studied?" },
+                    "Is efficacy proven in the researched age group and indication?": { "question": "Is efficacy proven in the researched age group and indication?" },
+                    "Can lack of efficacy be associated with inappropriate dosing?": { "question": "Can lack of efficacy be associated with inappropriate dosing?" },
+                    "Which knowledge gaps have been identified?": { "question": "Which knowledge gaps have been identified?" }
+                }
+            },
+            "If no or not enough data is available off the desired age-group or indication?": {
+                "question": "If no or not enough data is available off the desired age-group or indication?",
+                "children": {
+                    "Is there data available in other pediatric age groups or indication?": {
+                        "question": "Is there data available in other pediatric age groups or indication?",
+                        "children": {
+                            "If yes, please answer the same questions as mentioned in 1.1": {
+                                "question": "If yes, please answer the same questions as mentioned in 1.1",
+                                "children": {}
+                            },
+                            "If no, is the drug used in adults for the same or similar indications?": {
+                                "question": "If no, is the drug used in adults for the same or similar indications?",
+                                "children": {
+                                    "If yes, is there a similar disease progression and response to intervention in pediatrics and adults?": {
+                                        "question": "If yes, is there a similar disease progression and response to intervention in pediatrics and adults?",
+                                        "children": {
+                                            "If yes, is there a similar exposure-response in pediatrics and adults?": {
+                                                "question": "If yes, is there a similar exposure-response in pediatrics and adults?",
+                                                "children": {
+                                                    "If yes, what are these similarities?": {
+                                                        "question": "If yes, what are these similarities?",
+                                                        "children": {}
+                                                    },
+                                                    "Please answer the questions, mentioned in 1.1": {
+                                                        "question": "Please answer the questions, mentioned in 1.1",
+                                                        "children": {} 
+                                                    },
+                                                    "If no, you have identified a knowledge gap. Please list this in your conclusion.": {
+                                                        "question": "If no, you have identified a knowledge gap. Please list this in your conclusion.",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            },
+                                            "If no:": {
+                                                "question": "If no:",
+                                                "children": {
+                                                    "What are the differences?": {
+                                                        "question": "What are the differences?",
+                                                        "children": {}
+                                                    },
+                                                    "You have identified a knowledge gap. Please list this in your conclusion.": {
+                                                        "question": "You have identified a knowledge gap. Please list this in your conclusion.",
+                                                        "children": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "If no, you have identified a knowledge gap. Please list this in your conclusion.": {
+                                        "question": "If no, you have identified a knowledge gap. Please list this in your conclusion.",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "If a drug is not used in adults or children of different age; what is the assumed mechanism of action?": {
+                "question": "If a drug is not used in adults or children of different age; what is the assumed mechanism of action?",
+                "children": {
+                    "Based on the mechanism of action, is the drug likely to be effective for the intended indication?": {
+                        "question": "Based on the mechanism of action, is the drug likely to be effective for the intended indication?",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    }
+}

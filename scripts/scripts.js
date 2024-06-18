@@ -1,17 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Example drug data
-  const drugs = {
-      "Aspirin": ["Headache", "Pain", "Fever"],
-      "Ibuprofen": ["Inflammation", "Pain", "Fever"]
-  };
-
-  if (window.location.pathname.endsWith('assessment.html') == false && window.location.pathname.endsWith('summary.html') == false) {
-
-    const drugSelect = document.getElementById('drug');
-    const indicationSelect = document.getElementById('indication');
-
     // Function to populate drug options
-    function populateDrugOptions() {
+    function populateDrugOptions(drugs) {
+        const drugSelect = document.getElementById('drug');
         for (const drug in drugs) {
             const option = document.createElement('option');
             option.value = drug;
@@ -20,100 +10,167 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Initial population of drug options
-    populateDrugOptions();
+    // Function to update indications based on selected drug
+    function updateIndications(drugs) {
+        const drugSelect = document.getElementById('drug');
+        const indicationSelect = document.getElementById('indication');
+        
+        drugSelect.addEventListener('change', function() {
+            indicationSelect.innerHTML = '<option value="" selected disabled>Select an indication</option>';
+            const selectedDrug = drugSelect.value;
+            if (selectedDrug) {
+                drugs[selectedDrug].forEach(indication => {
+                    const option = document.createElement('option');
+                    option.value = indication;
+                    option.textContent = indication;
+                    indicationSelect.appendChild(option);
+                });
+            }
+        });
+    }
 
-    // Update indications based on selected drug
-    drugSelect.addEventListener('change', function() {
-        indicationSelect.innerHTML = '';
-        const selectedDrug = drugSelect.value;
-        if (selectedDrug) {
-            drugs[selectedDrug].forEach(indication => {
-                const option = document.createElement('option');
-                option.value = indication;
-                option.textContent = indication;
-                indicationSelect.appendChild(option);
-            });
+    // Recursive function to render questions based on the tree structure
+    function renderQuestions(container, questionsTree) {
+        const ageGroup = sessionStorage.getItem('ageGroup');
+
+        for (const key in questionsTree) {
+            const questionData = questionsTree[key];
+            const div = document.createElement('div');
+            div.classList.add('question');
+
+            if (questionData.type === "header") {
+                const header = document.createElement('h2');
+                header.textContent = questionData.question;
+                div.appendChild(header);
+            } else if (questionData.type === "subheader") {
+                const subheader = document.createElement('h3');
+                subheader.textContent = questionData.question.replace("children", ageGroup);
+                div.appendChild(subheader);
+            } else {
+                const label = document.createElement('label');
+                label.textContent = questionData.question;
+                div.appendChild(label);
+
+                let input;
+                if (questionData.type === "text") {
+                    input = document.createElement('textarea');
+                    input.rows = 5;
+                } else if (questionData.type === "number") {
+                    input = document.createElement('input');
+                    input.type = 'number';
+                } else if (questionData.type === "yesno") {
+                    input = document.createElement('select');
+                    const optionYes = document.createElement('option');
+                    optionYes.value = "yes";
+                    optionYes.textContent = "Yes";
+                    input.appendChild(optionYes);
+
+                    const optionNo = document.createElement('option');
+                    optionNo.value = "no";
+                    optionNo.textContent = "No";
+                    input.appendChild(optionNo);
+                }
+
+                input.dataset.question = questionData.question; // Store the question text in data attribute
+                div.appendChild(input);
+            }
+
+            container.appendChild(div);
+
+            if (Object.keys(questionData.children).length > 0) {
+                const childContainer = document.createElement('div');
+                childContainer.classList.add('child-questions');
+                container.appendChild(childContainer);
+
+                if (questionData.type !== "header" && questionData.type !== "subheader") {
+                    input.addEventListener('keypress', function(event) {
+                        if (event.key === 'Enter' && !event.shiftKey) {
+                            event.preventDefault();
+                            // Render child questions only if there's an input value
+                            if (input.value.trim() !== "") {
+                                childContainer.innerHTML = ''; // Clear previous questions
+                                renderQuestions(childContainer, questionData.children);
+                            }
+                        }
+                    });
+                } else {
+                    renderQuestions(childContainer, questionData.children);
+                }
+            }
         }
-    });
+    }
 
-    // Handle form submission
-    document.getElementById('selectionForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const drug = drugSelect.value;
-        const ageGroup = document.getElementById('ageGroup').value;
-        const indication = indicationSelect.value;
-        sessionStorage.setItem('drug', drug);
-        sessionStorage.setItem('ageGroup', ageGroup);
-        sessionStorage.setItem('indication', indication);
-        window.location.href = 'assessment.html';
-    });
-  }
+    // Function to initialize assessment questions
+    function initializeAssessment(questionsTree) {
+        const questionsContainer = document.getElementById('questionsContainer');
+        renderQuestions(questionsContainer, questionsTree);
 
-  // Populate assessment form
-  if (window.location.pathname.endsWith('assessment.html')) {
-      const questions = {
-          "common": [
-              { "question": "Is the patient currently on any medication?", "type": "text" },
-              { "question": "Has the patient experienced any adverse effects?", "type": "text" }
-          ],
-          "Aspirin": [
-              { "question": "Is the patient allergic to NSAIDs?", "type": "text" }
-          ],
-          "Ibuprofen": [
-              { "question": "Does the patient have a history of stomach ulcers?", "type": "text" }
-          ]
-      };
+        document.getElementById('assessmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Collect answers and generate summary
+            const answers = {};
+            questionsContainer.querySelectorAll('textarea, input, select').forEach(input => {
+                if (input.value.trim() !== "") {
+                    answers[input.dataset.question] = input.value;
+                }
+            });
+            sessionStorage.setItem('answers', JSON.stringify(answers));
+            window.location.href = 'summary.html';
+        });
+    }
 
-      const drug = sessionStorage.getItem('drug');
-      const questionsContainer = document.getElementById('questionsContainer');
+    // Generate summary
+    function generateSummary() {
+        const drug = sessionStorage.getItem('drug');
+        const ageGroup = sessionStorage.getItem('ageGroup');
+        const indication = sessionStorage.getItem('indication');
+        const answers = JSON.parse(sessionStorage.getItem('answers'));
+        const summaryContainer = document.getElementById('summaryContainer');
 
-      questions.common.forEach(q => {
-          const label = document.createElement('label');
-          label.textContent = q.question;
-          const input = document.createElement('input');
-          input.type = q.type;
-          questionsContainer.appendChild(label);
-          questionsContainer.appendChild(input);
-      });
+        let summary = `<p>Drug: ${drug}</p>`;
+        summary += `<p>Age Group: ${ageGroup}</p>`;
+        summary += `<p>Indication: ${indication}</p>`;
+        summary += '<p>Answers:</p><ul>';
+        for (const question in answers) {
+            summary += `<li>${question}: ${answers[question]}</li>`;
+        }
+        summary += '</ul>';
 
-      if (questions[drug]) {
-          questions[drug].forEach(q => {
-              const label = document.createElement('label');
-              label.textContent = q.question;
-              const input = document.createElement('input');
-              input.type = q.type;
-              questionsContainer.appendChild(label);
-              questionsContainer.appendChild(input);
-          });
-      }
+        summaryContainer.innerHTML = summary;
+    }
 
-      document.getElementById('assessmentForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          // Collect answers and generate summary
-          const answers = [];
-          questionsContainer.querySelectorAll('input').forEach(input => {
-              answers.push(input.value);
-          });
-          sessionStorage.setItem('answers', JSON.stringify(answers));
-          window.location.href = 'summary.html';
-      });
-  }
+    if (!window.location.pathname.endsWith('assessment.html') && !window.location.pathname.endsWith('summary.html')) {
+        // Fetch drug data from JSON file
+        fetch('drugs.json')
+            .then(response => response.json())
+            .then(drugs => {
+                populateDrugOptions(drugs);
+                updateIndications(drugs);
 
-  // Generate summary
-  if (window.location.pathname.endsWith('summary.html')) {
-      const drug = sessionStorage.getItem('drug');
-      const ageGroup = sessionStorage.getItem('ageGroup');
-      const indication = sessionStorage.getItem('indication');
-      const answers = JSON.parse(sessionStorage.getItem('answers'));
-      const summaryContainer = document.getElementById('summaryContainer');
-      
-      const summary = `
-          <p>Drug: ${drug}</p>
-          <p>Age Group: ${ageGroup}</p>
-          <p>Indication: ${indication}</p>
-          <p>Answers: ${answers.join(', ')}</p>
-      `;
-      summaryContainer.innerHTML = summary;
-  }
+                // Handle form submission
+                document.getElementById('selectionForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const drug = document.getElementById('drug').value;
+                    const ageGroup = document.getElementById('ageGroup').value;
+                    const indication = document.getElementById('indication').value;
+                    sessionStorage.setItem('drug', drug);
+                    sessionStorage.setItem('ageGroup', ageGroup);
+                    sessionStorage.setItem('indication', indication);
+                    window.location.href = 'assessment.html';
+                });
+            })
+            .catch(error => console.error('Error loading drugs:', error));
+    }
+
+    // Fetch questions data from JSON file
+    fetch('questions.json')
+        .then(response => response.json())
+        .then(questionsTree => {
+            if (window.location.pathname.endsWith('assessment.html')) {
+                initializeAssessment(questionsTree);
+            } else if (window.location.pathname.endsWith('summary.html')) {
+                generateSummary();
+            }
+        })
+        .catch(error => console.error('Error loading questions:', error));
 });

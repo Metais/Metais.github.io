@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drug Assessment Tool</title>
+    <title>FAST Drug Assessment</title>
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="/Icon.png">
 </head>
@@ -14,7 +14,9 @@
     <main>
         <form id="selectionForm">
             <label for="drug">Select Drug:</label>
-            <select id="drug" name="drug" required></select>
+            <select id="drug" name="drug" required>
+              <option value="" selected disabled>Select a drug</option>
+            </select>
 
             <label for="ageGroup">Select Age Group:</label>
             <select id="ageGroup" name="ageGroup" required>

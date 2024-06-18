@@ -1,0 +1,49 @@
+{
+    "1": {
+        "question": "Assessment of available data",
+        "type": "header",
+        "children": {
+            "1.1": {
+                "question": "What is known from original studies in children about efficacy of the intended use?",
+                "type": "subheader",
+                "children": {
+                    "1.1.1": {
+                        "question": "What clinical parameters and cut-offs are used to define sufficient efficacy?",
+                        "type": "text",
+                        "children": {}
+                    },
+                    "1.1.2": {
+                        "question": "What study method has been used?",
+                        "type": "text",
+                        "children": {}
+                    },
+                    "1.1.3": {
+                        "question": "The number of study participants in each study?",
+                        "type": "number",
+                        "children": {}
+                    },
+                    "1.1.4": {
+                        "question": "What kind of formulation has been studied?",
+                        "type": "text",
+                        "children": {}
+                    },
+                    "1.1.5": {
+                        "question": "Is efficacy proven in the researched age group and indication?",
+                        "type": "yesno",
+                        "children": {}
+                    },
+                    "1.1.6": {
+                        "question": "Can lack of efficacy be associated with inappropriate dosing?",
+                        "type": "yesno",
+                        "children": {}
+                    },
+                    "1.1.7": {
+                        "question": "Which knowledge gaps have been identified?",
+                        "type": "text",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    }
+}
