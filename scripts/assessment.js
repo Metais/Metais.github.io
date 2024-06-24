@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // The questions that if answered with 'yes', will show the child questions
     const questionDependencies = {
-        "1.1.5": ["1.1.6", "1.1.7", "1.2"]
+        "1.1.5": ["1.1.6", "1.1.7", "1.2", "1.2.1"]
     };
 
     var questionsAssociations = {};
