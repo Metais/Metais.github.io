@@ -43,6 +43,17 @@
                         "children": {}
                     }
                 }
+            },
+            "1.2": {
+                "question": "Insufficient data available of the desired age-group or indication.",
+                "type": "subheader",
+                "children": {
+                    "1.2.1": {
+                        "question": "For which age groups is data available?",
+                        "type": "text",
+                        "children": {}
+                    }
+                }
             }
         }
     }

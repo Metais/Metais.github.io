@@ -32,6 +32,7 @@ form {
 label {
   margin-bottom: 5px;
   font-weight: bold;
+  vertical-align: middle;
 }
 
 select, input[type="text"], textarea {
@@ -76,4 +77,19 @@ button:hover {
   margin-top: 10px;
   border-left: 2px solid #ddd;
   padding-left: 10px;
+}
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.radio-container label {
+  margin-right: 8px;
+  vertical-align: baseline
+}
+
+.radio-container input[type="radio"] {
+  vertical-align: baseline
 }
